@@ -60,8 +60,6 @@
 | olist_geolocation_dataset.csv | 1,000,163 | Too large, geography not relevant — will exclude |
 | product_category_name_translation.csv | 71 | Small lookup table, 71 categories |
 
-> 💡 **Guided observation:** order_items has MORE rows than orders — this means some orders contain multiple items. Write this down. It will affect how you calculate revenue in SQL (you must SUM price per order, not just count orders).
-
 **My key observation from row counts:**
 ```
 - order_items has 112,650 rows vs 99,441 orders, meaning some orders contain multiple items. I must GROUP BY order_id when calculating revenue to avoid double-counting. 
