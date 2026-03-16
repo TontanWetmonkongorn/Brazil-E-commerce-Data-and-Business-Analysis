@@ -61,11 +61,9 @@
 | product_category_name_translation.csv | 71 | Small lookup table, 71 categories |
 
 **My key observation from row counts:**
-```
 - order_items has 112,650 rows vs 99,441 orders, meaning some orders contain multiple items. I must GROUP BY order_id when calculating revenue to avoid double-counting. 
 - order_payments also has more rows than orders (103,886) for the same reason — some customers split payments across two methods.
 - customers matches orders exactly at 99,441 — confirming a clean 1-to-1 relationship.
-```
 
 ---
 
