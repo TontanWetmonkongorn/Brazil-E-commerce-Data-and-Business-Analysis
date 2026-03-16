@@ -50,23 +50,23 @@
 **What I found:**
 | File | Row Count | My Notes |
 |------|-----------|----------|
-| olist_orders_dataset.csv | 99,441 | [write what you notice] |
-| olist_order_items_dataset.csv | 112,650 | [write what you notice — why more than orders?] |
-| olist_order_payments_dataset.csv | 103,886 | [write what you notice] |
-| olist_order_reviews_dataset.csv | 99,224 | [write what you notice] |
-| olist_customers_dataset.csv | 99,441 | [write what you notice] |
-| olist_sellers_dataset.csv | 3,095 | [write what you notice] |
-| olist_products_dataset.csv | 32,951 | [write what you notice] |
-| olist_geolocation_dataset.csv | 1,000,163 | [write what you notice] |
-| product_category_name_translation.csv | 71 | [write what you notice] |
+| olist_orders_dataset.csv | 99,441 | Main fact table |
+| olist_order_items_dataset.csv | 112,650 | More rows than orders — multiple items per order |
+| olist_order_payments_dataset.csv | 103,886 | More rows than orders — some split payments |
+| olist_order_reviews_dataset.csv | 99,224 | ~217 orders have no review — normal |
+| olist_customers_dataset.csv | 99,441 | Matches orders exactly — clean 1-to-1 |
+| olist_sellers_dataset.csv | 3,095 | ~32 orders per seller on average |
+| olist_products_dataset.csv | 32,951 | 32,951 unique products |
+| olist_geolocation_dataset.csv | 1,000,163 | Too large, geography not relevant — will exclude |
+| product_category_name_translation.csv | 71 | Small lookup table, 71 categories |
 
 > 💡 **Guided observation:** order_items has MORE rows than orders — this means some orders contain multiple items. Write this down. It will affect how you calculate revenue in SQL (you must SUM price per order, not just count orders).
 
 **My key observation from row counts:**
 ```
-[Write 2-3 sentences here. Example: "order_items has 112,650 rows vs 99,441 orders,
-meaning some orders have multiple items. I need to GROUP BY order_id when calculating
-revenue to avoid double-counting."]
+- order_items has 112,650 rows vs 99,441 orders, meaning some orders contain multiple items. I must GROUP BY order_id when calculating revenue to avoid double-counting. 
+- order_payments also has more rows than orders (103,886) for the same reason — some customers split payments across two methods.
+- customers matches orders exactly at 99,441 — confirming a clean 1-to-1 relationship.
 ```
 
 ---
